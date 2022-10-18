@@ -8,6 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { CreateTaskDTO } from './dto/create-task.dto';
+import { UpdateTaskStatusDto } from './dto/validate-task-dto';
 import { Task } from './tasks.model';
 import { TasksService } from './tasks.service';
 
@@ -31,10 +32,11 @@ export class TasksController {
   }
 
   @Patch(':id/status')
-  updateTaskStatus(@Param('id') id: string, @Body('status') status: string) {
-    if (!id) return 'ID is not find.';
-    if (!status) return 'STATUS is not found.';
-    return this.tasksServices.updateATask(id, status);
+  updateTaskStatus(
+    @Param('id') id: string,
+    @Body() updateTaskStatusDto: UpdateTaskStatusDto,
+  ) {
+    return this.tasksServices.updateATask(id, updateTaskStatusDto.status);
   }
 
   @Delete(':id')
