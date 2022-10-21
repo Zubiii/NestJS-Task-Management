@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { CreateTaskDTO } from './dto/create-task.dto';
 import { UpdateTaskStatusDto } from './dto/validate-task-dto';
+import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
 
 @Controller('tasks')
@@ -20,6 +21,11 @@ export class TasksController {
   //   return this.tasksServices.getAllTasks();
   // }
 
+  @Get(':id')
+  getATask(@Param('id') id: string): Promise<Task> {
+    console.log(`ID => ${id}`);
+    return this.tasksServices.getATask(id);
+  }
   // @Get(':id')
   // getATask(@Param('id') id: string) {
   //   return this.tasksServices.getATask(id);
