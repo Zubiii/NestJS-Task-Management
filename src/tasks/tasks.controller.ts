@@ -23,7 +23,7 @@ export class TasksController {
 
   @Get(':id')
   getATask(@Param('id') id: string): Promise<Task> {
-    console.log(`ID => ${id}`);
+    // console.log(`ID => ${id}`);
     return this.tasksServices.getATask(id);
   }
   // @Get(':id')
