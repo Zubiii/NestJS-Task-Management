@@ -2,11 +2,13 @@ import {
   ConflictException,
   Injectable,
   InternalServerErrorException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
+import { AuthCredentialsDTO } from './dto/auth-credentials.dto';
 
 @Injectable()
 export class AuthService {
@@ -32,6 +34,17 @@ export class AuthService {
       if (error.code === '23505')
         throw new ConflictException('Username is already exists');
       else throw new InternalServerErrorException();
+    }
+  }
+
+  async signin(authCredentialDTO: AuthCredentialsDTO) {
+    const { username, password } = authCredentialDTO;
+    const user = await this.userRepository.findOneBy({ username });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      return 'sucess';
+    } else {
+      throw new UnauthorizedException('Username or password is wrong');
     }
   }
 }
