@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateTaskDTO } from './dto/create-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './task.entity';
@@ -8,6 +13,8 @@ import { User } from 'src/auth/user.entity';
 
 @Injectable()
 export class TasksService {
+  private logger = new Logger('Tasks Services', { timestamp: true });
+
   constructor(
     @InjectRepository(Task)
     private tasksRepository: Repository<Task>,
@@ -26,15 +33,23 @@ export class TasksService {
   }
 
   async createTask(createTaskDTO: CreateTaskDTO, user: User): Promise<Task> {
-    const { title, description } = createTaskDTO;
-    const task = this.tasksRepository.create({
-      title,
-      description,
-      status: TaskStatus.OPEN,
-      user,
-    });
-    await this.tasksRepository.save(task);
-    return task;
+    try {
+      const { title, description } = createTaskDTO;
+      const task = this.tasksRepository.create({
+        title,
+        description,
+        status: TaskStatus.OPEN,
+        user,
+      });
+      await this.tasksRepository.save(task);
+      return task;
+    } catch (error) {
+      this.logger.error(
+        `Failed to create Task for User: ${user.id}. Task : ${createTaskDTO}`,
+        error.stack,
+      );
+      throw new InternalServerErrorException();
+    }
   }
 
   async updateATask(id: string, status: TaskStatus, user: User): Promise<Task> {
