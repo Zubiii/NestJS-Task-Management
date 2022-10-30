@@ -7,6 +7,7 @@ const port = 3000;
 async function bootstrap() {
   const logger = new Logger('Application Started', { timestamp: true });
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new TransfomInterceptor());
   await app.listen(port);
