@@ -19,7 +19,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransfomInterceptor());
 
   // Enable CORS
-  // app.enableCors();
+  app.enableCors();
 
   //litining on port
   await app.listen(port);

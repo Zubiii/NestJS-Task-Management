@@ -7,7 +7,8 @@ module.exports = {
   theme: {
     colors: {
       stone: '#f5f5f4',
-
+      white: '#ffffff',
+      red: '#dc2626',
       zinic800: '#27272a',
       
       // Buttons 

@@ -1,17 +1,17 @@
 <template>
-    <div class="flex flex-col justify-center h-screen bg-stone ">
-        <div>
-            <SignIn />
+    <div class="h-screen bg-stone flex flex-col justify-center">
+        <div class=" ">
+            <SignIn v-if="authModule !== 'login'" />
             <div class="flex flex-row justify-center">
                 <div v-if="authModule === 'login'">
-                    <OrangeBgButnVue @click="ToggleSignup()">
-                        Login
-                    </OrangeBgButnVue>
+                    <DarkBgButnVue @click="ToggleSignup()">
+                        Alreadey have an Account? <strong>Login</strong>
+                    </DarkBgButnVue>
                 </div>
                 <div v-else >
-                    <OrangeBgButnVue @click="ToggleLogin()">
-                        SignUp
-                    </OrangeBgButnVue>
+                    <DarkBgButnVue @click="ToggleLogin()">
+                        Create new Account <strong>SignUp</strong>
+                    </DarkBgButnVue>
                 </div>
             </div>
         </div>
@@ -20,12 +20,12 @@
 
 <script>
 import { reactive, toRefs } from 'vue'
-import OrangeBgButnVue from '@/components/Buttons/OrangeBgButn.vue'
+import DarkBgButnVue from '@/components/Buttons/DarkBgButn.vue'
 import SignIn from './SignIn.vue'
 export default {
     setup() {
         const state = reactive({
-            authModule: 'login'
+            authModule: 'signup'
         })
         return {
             ...toRefs(state)
@@ -40,7 +40,7 @@ export default {
         }
     },
     components: {
-        OrangeBgButnVue,
+        DarkBgButnVue,
         SignIn
     }
 }
