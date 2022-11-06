@@ -41,9 +41,9 @@ export class AuthService {
   }
 
   async signin(
-    authCredentialDTO: AuthCredentialsDTO,
+    username: string,
+    password: string,
   ): Promise<{ accessToken: string }> {
-    const { username, password } = authCredentialDTO;
     const user = await this.userRepository.findOneBy({ username });
 
     if (user && (await bcrypt.compare(password, user.password))) {

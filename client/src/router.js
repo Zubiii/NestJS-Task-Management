@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import home from './views/Home/HomeIndex.vue'
 import auth from './views/Auth/AuthIndex.vue'
+import profile from './views/Profile/ProfileIndex.vue'
 
 const routes = [
     {
@@ -10,6 +11,10 @@ const routes = [
     {
         path: '/auth',
         component: auth
+    },
+    {
+        path: '/profile',
+        component: profile
     }
 ]
 

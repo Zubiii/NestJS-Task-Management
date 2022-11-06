@@ -4,14 +4,14 @@
             <p class="text-xl font-bold mb-1 text-orange400">Login</p>
             <p class="font-medium text-orange400/90">Welcome to Task Managment</p>
         </div>
-        <div class="flex flex-col justify-center">
+        <div class="mt-3 flex flex-col justify-center">
+            <input class="p-1 px-3 rounded font-bold" v-model="username" type="text" placeholder="Username" required />
+        </div>
+        <div class="mt-3 flex flex-col justify-center">
+            <input class="p-1 px-3 rounded font-bold" v-model="password" type="password" placeholder="Password" required />
+        </div>
+        <div class="flex flex-col justify-center mt-2">
             <p class="font-medium text-red">{{ error.message }}</p>
-        </div>
-        <div class="mt-3">
-            <input class="p-1 px-3 rounded font-bold" type="name" placeholder="Username" required />
-        </div>
-        <div class="mt-3">
-            <input class="p-1 px-3 rounded font-bold" type="password" placeholder="Password" required />
         </div>
         <div>
             <OrangeBgBtnVue @click="login">
@@ -24,14 +24,18 @@
 <script>
 import OrangeBgBtnVue from '@/components/Buttons/OrangeBgBtn.vue';
 import { reactive, toRefs } from '@vue/reactivity';
-import axios from 'axios';
+import AuthService from '@/services/auth'
+const authService = new AuthService;
 
 export default {
     setup() {
         const state = reactive({
+            username: '',
+            password: '',
             error: {
                 message: '',
-                code: ''
+                code: '',
+                statusCode: ''
             }
         })
 
@@ -44,8 +48,13 @@ export default {
     },
     methods: {
         async login() {
-            const data = await axios.get('http://localhost:3000/api/auth/test').then( res => res.data)
-            console.log("Data => ", data)
+            const signin = await authService.signin(this.username, this.password)
+            if(signin.error) {
+                this.error = signin
+            }
+            if(signin.username) {
+                this.$router.push('/profile')
+            }
         }
     }
 }
