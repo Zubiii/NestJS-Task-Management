@@ -1,14 +1,29 @@
 <template>
-  <div>
-    <h1>Profile</h1>
+  <div class="bg-stone h-screen">
+    <div class="flex flex-col">
+      <div class="m-10 bg-orange400/30 p-10 w-100 rounded-lg text-left">
+        <h1 class="uppercase font-bold">Hello {{ username }}!</h1>
+        <p class="font-medium">
+          Welcome back to Task Managment Board
+        </p>
+      </div>
+    </div>
+    <div>
+      Your other part will go here
+    </div>
   </div>
 </template>
 
 <script>
-import VueJwtDecode from 'vue-jwt-decode'
+import { reactive, toRefs } from '@vue/reactivity'
 export default {
-  mounted() {
-    console.log("VueJwtDecode =>", VueJwtDecode.decode(localStorage.getItem('accessToken')))
+  setup() {
+    const state = reactive({
+      username: localStorage.getItem('username')
+    })
+    return {
+      ...toRefs(state)
+    }
   }
 }
 </script>
