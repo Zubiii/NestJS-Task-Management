@@ -6,6 +6,9 @@
         <p class="font-medium">
           Welcome back to Task Managment Board
         </p>
+        <OrangeBgBtnVue>
+          Add New Task
+        </OrangeBgBtnVue>
       </div>
     </div>
     <div>
@@ -16,6 +19,8 @@
 
 <script>
 import { reactive, toRefs } from '@vue/reactivity'
+import OrangeBgBtnVue from '@/components/Buttons/OrangeBgBtn.vue'
+
 export default {
   setup() {
     const state = reactive({
@@ -24,6 +29,9 @@ export default {
     return {
       ...toRefs(state)
     }
+  },
+  components: {
+    OrangeBgBtnVue
   }
 }
 </script>
