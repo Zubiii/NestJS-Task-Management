@@ -1,10 +1,6 @@
 <template>
   <div class="bg-stone h-screen">
-    <div class="flex flex-row-reverse px-10">
-      <TransparentBtn class="mt-4 flex">
-        <vue-feather type="log-out"></vue-feather>Logout
-      </TransparentBtn>
-    </div>
+    <header-layout></header-layout>
     <div class="flex flex-col">
       <div class="m-10 bg-orange400/30 p-10 w-100 rounded-lg text-left">
         <h1 class="uppercase font-bold">Hello {{ username }}!</h1>
@@ -25,7 +21,7 @@
 <script>
 import { reactive, toRefs } from '@vue/reactivity'
 import OrangeBgBtnVue from '@/components/Buttons/OrangeBgBtn.vue'
-import TransparentBtn from '@/components/Buttons/TransparentBtn.vue'
+// import TransparentBtn from '@/components/Buttons/TransparentBtn.vue'
 
 export default {
   setup() {
@@ -37,8 +33,8 @@ export default {
     }
   },
   components: {
-    OrangeBgBtnVue,
-    TransparentBtn
+    OrangeBgBtnVue
+    // TransparentBtn
   }
 }
 </script>
