@@ -1,13 +1,18 @@
 <template>
   <div class="bg-stone h-screen">
+    <div class="flex flex-row-reverse px-10">
+      <TransparentBtn class="mt-4">
+        Logout
+      </TransparentBtn>
+    </div>
     <div class="flex flex-col">
       <div class="m-10 bg-orange400/30 p-10 w-100 rounded-lg text-left">
         <h1 class="uppercase font-bold">Hello {{ username }}!</h1>
         <p class="font-medium">
           Welcome back to Task Managment Board
         </p>
-        <OrangeBgBtnVue>
-          Add New Task
+        <OrangeBgBtnVue class="mt-4">
+          <ui-icon>add</ui-icon>Add New Task
         </OrangeBgBtnVue>
       </div>
     </div>
@@ -20,6 +25,7 @@
 <script>
 import { reactive, toRefs } from '@vue/reactivity'
 import OrangeBgBtnVue from '@/components/Buttons/OrangeBgBtn.vue'
+import TransparentBtn from '@/components/Buttons/TransparentBtn.vue'
 
 export default {
   setup() {
@@ -31,7 +37,8 @@ export default {
     }
   },
   components: {
-    OrangeBgBtnVue
+    OrangeBgBtnVue,
+    TransparentBtn
   }
 }
 </script>

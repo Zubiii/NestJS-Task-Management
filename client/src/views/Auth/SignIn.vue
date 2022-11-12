@@ -14,7 +14,7 @@
             <p class="font-medium text-red">{{ error.message }}</p>
         </div>
         <div>
-            <OrangeBgBtnVue @click="login">
+            <OrangeBgBtnVue class="mt-3" @click="login">
                 Login
             </OrangeBgBtnVue>
         </div>

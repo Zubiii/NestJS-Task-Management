@@ -5,7 +5,6 @@
             text-md
             text-white
             font-bold
-            m-4 
             bg-orange400
             px-2 
             py-1
