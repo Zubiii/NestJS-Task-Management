@@ -1,8 +1,8 @@
 <template>
   <div class="bg-stone h-screen">
     <div class="flex flex-row-reverse px-10">
-      <TransparentBtn class="mt-4">
-        Logout
+      <TransparentBtn class="mt-4 flex">
+        <vue-feather type="log-out"></vue-feather>Logout
       </TransparentBtn>
     </div>
     <div class="flex flex-col">
@@ -11,8 +11,8 @@
         <p class="font-medium">
           Welcome back to Task Managment Board
         </p>
-        <OrangeBgBtnVue class="mt-4">
-          Add New Task
+        <OrangeBgBtnVue class="mt-4 flex">
+          <vue-feather type="plus"></vue-feather>Add New Task
         </OrangeBgBtnVue>
       </div>
     </div>
