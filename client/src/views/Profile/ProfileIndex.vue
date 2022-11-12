@@ -12,7 +12,7 @@
           Welcome back to Task Managment Board
         </p>
         <OrangeBgBtnVue class="mt-4">
-          <ui-icon>add</ui-icon>Add New Task
+          Add New Task
         </OrangeBgBtnVue>
       </div>
     </div>
