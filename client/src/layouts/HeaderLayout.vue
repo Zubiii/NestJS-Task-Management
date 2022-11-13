@@ -8,6 +8,8 @@
 
 <script>
 import TransparentBtn from '@/components/Buttons/TransparentBtn.vue'
+import AuthService from '@/services/auth';
+const Auth = new AuthService()
 
 export default {
     components: {
@@ -15,8 +17,7 @@ export default {
     },
     methods: {
         logout() {
-            localStorage.removeItem('username')
-            localStorage.removeItem('accessToken')
+            Auth.logout()
             this.$router.push('/')
         }
     }

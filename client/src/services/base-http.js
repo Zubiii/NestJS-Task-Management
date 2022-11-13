@@ -1,29 +1,29 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default class BaseHttpService {
-    BaseURL = process.env.VUE_APP_BASE_URL || 'http:localhost:3000/api'
-    _accessToken = null
+  BaseURL = process.env.VUE_APP_BASE_URL || 'http:localhost:3000/api';
+  _accessToken = null;
 
-    constructor(routerStore){
-        this.routerStore = routerStore
-    }
+  constructor(routerStore) {
+    this.routerStore = routerStore;
+  }
 
-    async get(endpoint, options = {}) {
-        return axios.get(`${this.BaseURL}${endpoint}`, options)
-            .catch( err => err)
-    }
+  async get(endpoint, options = {}) {
+    return axios.get(`${this.BaseURL}${endpoint}`, options).catch((err) => err);
+  }
 
-    async post(endpoint, data, options = {}) {
-        return axios.post(`${this.BaseURL}${endpoint}`, data, options)
-            .catch( err => err)
-    }
+  async post(endpoint, data, options = {}) {
+    return axios
+      .post(`${this.BaseURL}${endpoint}`, data, options)
+      .catch((err) => err);
+  }
 
-    async patch(endpoint, data, options = {}) {
-        return axios.patch(`${this.BaseURL}${endpoint}`, data, options)
-    }
+  async patch(endpoint, data, options = {}) {
+    return axios.patch(`${this.BaseURL}${endpoint}`, data, options);
+  }
 
-    saveToken(accessToken) {
-        this._accessToken = accessToken
-        return localStorage.setItem('accessToekn', accessToken)
-    }
+  saveToken(accessToken) {
+    this._accessToken = accessToken;
+    return localStorage.setItem('accessToekn', accessToken);
+  }
 }
