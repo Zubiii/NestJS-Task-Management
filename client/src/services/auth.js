@@ -28,16 +28,13 @@ export default class AuthService extends BaseHttpService {
 
   async signup(username, password) {
     const req = await this.post('/auth/signup', { username, password });
-    const { accessToken, error, message, statusCode } =
+    const { error, message, statusCode } =
       HttpHandler.HttpHandler(req);
 
-    if (accessToken) {
-      this._accessToken = accessToken;
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('username', username);
+    if (req.status === 201) {
       return {
-        username: username,
-      };
+        'message': `${username} is created you can login now!`
+      }
     }
     if (error) {
       return {
