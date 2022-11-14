@@ -1,5 +1,8 @@
 <template>
-  <router-view />
+  <div>
+    <router-view />
+    <notifications class="mt-5" />
+  </div>
 </template>
 
 <script>

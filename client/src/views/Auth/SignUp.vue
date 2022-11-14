@@ -33,11 +33,9 @@ import OrangeBgBtnVue from '@/components/Buttons/OrangeBgBtn.vue';
 import { reactive, toRefs } from '@vue/reactivity';
 import AuthService from '@/services/auth'
 const authService = new AuthService;
+import { notify } from "@kyvg/vue3-notification";
 
 export default {
-    mounted(){
-        console.log("Toast => ", this.$toasts)
-    },
     setup() {
         const state = reactive({
             username: '',
@@ -61,11 +59,15 @@ export default {
             const signup = await authService.signup(this.username, this.password)
             if (signup.error) {
                 this.error = signup
+                return 
             }
             if (signup.message) {
-                
-
-                // this.$router.push('/profile')
+                notify({
+                    title: "SignUp",
+                    text: `${this.username} You have successfully Register. Now you can login into your Account`,
+                    type: "success"
+                })
+                this.$router.push('/auth')
             }
         }
     }
