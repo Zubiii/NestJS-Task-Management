@@ -2,7 +2,7 @@ import VueJwtDecode from 'vue-jwt-decode'
 
 export default function auth ({next}) {
     let isLoggedIn = localStorage.getItem('accessToken')
-    if(!isLoggedIn){
+    if(!isLoggedIn){        
         return next({
             name: 'login'
         })

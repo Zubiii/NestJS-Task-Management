@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-h-l:hover{
+    transform: scale(1.02);
+}

@@ -26,4 +26,11 @@ export default class BaseHttpService {
     this._accessToken = accessToken;
     return localStorage.setItem('accessToekn', accessToken);
   }
+
+  getToken() {
+    if(localStorage.getItem('accessToken')){
+      return  localStorage.getItem('accessToken')
+    }
+    return this._accessToken
+  }
 }
