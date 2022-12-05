@@ -5564,6 +5564,11 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
+smooth-dnd@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/smooth-dnd/-/smooth-dnd-0.12.1.tgz#cdb44c972355659e32770368b29b6a80e0ed96f1"
+  integrity sha512-Dndj/MOG7VP83mvzfGCLGzV2HuK1lWachMtWl/Iuk6zV7noDycIBnflwaPuDzoaapEl3Pc4+ybJArkkx9sxPZg==
+
 sockjs@^0.3.24:
   version "0.3.24"
   resolved "https://registry.npmjs.org/sockjs/-/sockjs-0.3.24.tgz"
@@ -6116,6 +6121,13 @@ vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
+
+vue3-smooth-dnd@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/vue3-smooth-dnd/-/vue3-smooth-dnd-0.0.2.tgz#779c885754466b55930de8bfd0a13adc889782d7"
+  integrity sha512-5OlpoZ1fmpA1CcjvRwJ9P3MEPZ0nnnYuIf/9zMGKF8i7jTE6fQX3oeY0jDHNtOjuCmvTSbc0AYq18M9QIF32Ew==
+  dependencies:
+    smooth-dnd "^0.12.1"
 
 vue@3:
   version "3.2.41"
