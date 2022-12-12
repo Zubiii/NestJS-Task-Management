@@ -9,6 +9,6 @@ export default class Tasks extends BaseHttpService {
 
     async getTasks() {
         const req = (await this.get('/tasks', this.config)).data
-        return req
+        return await req
     }
 }

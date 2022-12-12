@@ -9,17 +9,17 @@ export default class BaseHttpService {
   }
 
   async get(endpoint, options = {}) {
-    return axios.get(`${this.BaseURL}${endpoint}`, options).catch((err) => err);
+    return await axios.get(`${this.BaseURL}${endpoint}`, options).catch((err) => err);
   }
 
   async post(endpoint, data, options = {}) {
-    return axios
+    return await axios
       .post(`${this.BaseURL}${endpoint}`, data, options)
       .catch((err) => err);
   }
 
   async patch(endpoint, data, options = {}) {
-    return axios.patch(`${this.BaseURL}${endpoint}`, data, options);
+    return await axios.patch(`${this.BaseURL}${endpoint}`, data, options);
   }
 
   saveToken(accessToken) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-stone h-screen">
+  <div class="bg-stone pb-10">
     <header-layout></header-layout>
     <div class="flex flex-col">
       <div class="shadow m-10 bg-orange400/30 p-6 w-100 rounded-lg text-left">
@@ -13,7 +13,10 @@
       </div>
     </div>
     <div class="mx-10 vh-100">
-      <Table></Table>
+      <TaskDraggable
+        :tasks="usrTasks"
+        :loading="loading"
+      ></TaskDraggable>
     </div>
   </div>
 </template>
@@ -21,7 +24,7 @@
 <script>
 import { reactive, toRefs } from '@vue/reactivity'
 import OrangeBgBtnVue from '@/components/Buttons/OrangeBgBtn.vue'
-import Table from './Table/IndexTable.vue'
+import TaskDraggable from './TaskDraggable/IndexTasks.vue'
 import Tasks from '../../services/tasks'
 const tasks = new Tasks()
 
@@ -29,8 +32,12 @@ export default {
   async created() {
     this.loading = true
     console.log('Loading: ', this.loading)
+    
     this.usrTasks = await tasks.getTasks()
-    console.log("_tasks: ", this.usrTasks)
+    console.log("_tasks: ", await this.usrTasks)
+
+    this.getStartTask()
+
     this.loading = false
     console.log('Loading: ', this.loading)
   },
@@ -46,7 +53,18 @@ export default {
   },
   components: {
     OrangeBgBtnVue,
-    Table
+    TaskDraggable
+  },
+  methods: {
+    getStartTask() {
+      return this.usrTasks.filter( a => a.status === "OPEN")
+    },
+    getInProgressTask() {
+      return this.usrTasks.filter( a => a.status === "IN_PROGRESS")
+    },
+    getDoneTask() {
+      return this.usrTasks.filter( a => a.status === "DONE")
+    }
   }
 }
 </script>
