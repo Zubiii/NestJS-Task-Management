@@ -7,14 +7,11 @@
           <h2 class="font-bold text-purple">START</h2>
   
           <div v-if="startTasks.length">
-            <div class="mt-2 p-2" v-for="task in startTasks" :key="task.id" draggable="true" @dragstart="startDrag($event, task)">
-              <h1 class="font-bold">{{ task.title }}</h1>
-              <p>{{ task.description }}</p>
+            <div v-for="task in startTasks" :key="task.id">
+              <TaskDraggableVue class="mt-2 p-2 rounded-lg bg-purple/30" draggable="true" @dragstart="startDrag($event, task)" :task="task"/>
             </div>
           </div>
-          <div v-else>
-            <h1 class="mt-2 p-2 font-bold">Not Any Task</h1>
-          </div>
+          <NotFoundVue v-else />
 
         </div>
 
@@ -22,28 +19,22 @@
           <h2 class="font-bold text-yellow">IN PROGRESS</h2>
       
           <div v-if="inProgressTasks.length">
-            <div class="mt-2 p-2" v-for="task in inProgressTasks" :key="task.id" draggable="true" @dragstart="startDrag($event, task)">
-              <h1 class="font-bold">{{ task.title }}</h1>
-              <p>{{ task.description }}</p>
+            <div v-for="task in inProgressTasks" :key="task.id">
+              <TaskDraggableVue class="mt-2 p-2 rounded-lg bg-yellow/30" draggable="true" @dragstart="startDrag($event, task)" :task="task"/>
             </div>
           </div>
-          <div v-else>
-            <h1 class="mt-2 p-2 font-bold">Not Any Task</h1>
-          </div>
+          <NotFoundVue v-else />
         </div>
 
         <div class="p-2" @drop="onDrop($event, 'DONE')" @dragover.prevent @dragenter.prevent>
           <h2 class="font-bold text-green">DONE</h2>
           
           <div v-if="doneTasks.length">
-            <div class="mt-2 p-2" v-for="task in doneTasks" :key="task.id" draggable="true" @dragstart="startDrag($event, task)">
-              <h1 class="font-bold">{{ task.title }}</h1>
-              <p>{{ task.description }}</p>
+            <div v-for="task in doneTasks" :key="task.id">
+              <TaskDraggableVue class="mt-2 p-2 rounded-lg bg-green/30" draggable="true" @dragstart="startDrag($event, task)" :task="task"/>
             </div>
           </div>
-          <div v-else>
-            <h1 class="mt-2 p-2 font-bold">Not Any Task</h1>
-          </div>
+          <NotFoundVue v-else />
         </div>
 
       </div>
@@ -53,11 +44,14 @@
 </template>
 
 <script>
+import NotFoundVue from './NotFound.vue'
+import TaskDraggableVue from './TaskDraggable.vue'
 import Tasks from '../../../services/tasks'
 const tasksApi = new Tasks()
 export default {
-  components: { 
-    //
+  components: {
+    NotFoundVue,
+    TaskDraggableVue
   },
   props: {
     tasks: Array,
@@ -91,12 +85,15 @@ export default {
       evt.dataTransfer.dropEffect = 'move'
       evt.dataTransfer.effectAllowed = 'move'
       localStorage.setItem('itemID', item.id)
+      localStorage.setItem('itemSTATUS', item.status)
     },
-    async onDrop(evt, list) {
-      console.log("OnDrop Event=>", evt)
+    async onDrop(evt, colStatus) {
       const itemID =localStorage.getItem('itemID')
-      await tasksApi.updateTaskStatus(list, itemID)
-      this.$emit('taskDrag', 'asd')
+      const itemSTATUS =localStorage.getItem('itemSTATUS')
+      if(colStatus !== itemSTATUS) {
+        await tasksApi.updateTaskStatus(colStatus, itemID)
+        this.$emit('taskDrag')
+      }
     }
   }
 }
