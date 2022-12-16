@@ -17,6 +17,9 @@ module.exports = {
       purple900: '#581c87',
 
       orange400: '#fb923c',
+      green: '#22c55e',
+      purple: '#7e22ce',
+      yellow: '#eab308'
     },
     extend: {},
   },

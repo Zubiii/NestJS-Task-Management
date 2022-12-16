@@ -16,6 +16,7 @@
       <TaskDraggable
         :tasks="usrTasks"
         :loading="loading"
+        @taskDrag="fetchTasks"
       ></TaskDraggable>
     </div>
   </div>
@@ -36,8 +37,6 @@ export default {
     this.usrTasks = await tasks.getTasks()
     console.log("_tasks: ", await this.usrTasks)
 
-    this.getStartTask()
-
     this.loading = false
     console.log('Loading: ', this.loading)
   },
@@ -56,14 +55,8 @@ export default {
     TaskDraggable
   },
   methods: {
-    getStartTask() {
-      return this.usrTasks.filter( a => a.status === "OPEN")
-    },
-    getInProgressTask() {
-      return this.usrTasks.filter( a => a.status === "IN_PROGRESS")
-    },
-    getDoneTask() {
-      return this.usrTasks.filter( a => a.status === "DONE")
+    async fetchTasks() {
+      this.usrTasks = await tasks.getTasks()
     }
   }
 }
