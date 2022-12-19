@@ -2,13 +2,13 @@
   <div>
     <div v-if="!loading">
       <div class="rounded-lg bg-white min-h-screen flex flex-row p-6">
-        
+
         <div class="p-2" @drop="onDrop($event, 'OPEN')" @dragover.prevent @dragenter.prevent>
-          <h2 class="font-bold text-purple">START</h2>
+          <h2 class="font-bold text-purple">OPEN</h2>
   
           <div v-if="startTasks.length">
-            <div v-for="task in startTasks" :key="task.id">
-              <TaskDraggableVue class="mt-2 p-2 rounded-lg bg-purple/30" draggable="true" @dragstart="startDrag($event, task)" :task="task"/>
+            <div v-for="task in startTasks" :key="task.id" @click="openModalExample(task)">
+              <TaskDraggableVue class="mt-2 p-2 rounded-lg bg-purple/30 cursor-pointer" draggable="true" @dragstart="startDrag($event, task)" :task="task"/>
             </div>
           </div>
           <NotFoundVue v-else />
@@ -19,8 +19,8 @@
           <h2 class="font-bold text-yellow">IN PROGRESS</h2>
       
           <div v-if="inProgressTasks.length">
-            <div v-for="task in inProgressTasks" :key="task.id">
-              <TaskDraggableVue class="mt-2 p-2 rounded-lg bg-yellow/30" draggable="true" @dragstart="startDrag($event, task)" :task="task"/>
+            <div v-for="task in inProgressTasks" :key="task.id" @click="openModalExample(task)">
+              <TaskDraggableVue class="mt-2 p-2 rounded-lg bg-yellow/30 cursor-pointer" draggable="true" @dragstart="startDrag($event, task)" :task="task"/>
             </div>
           </div>
           <NotFoundVue v-else />
@@ -30,8 +30,8 @@
           <h2 class="font-bold text-green">DONE</h2>
           
           <div v-if="doneTasks.length">
-            <div v-for="task in doneTasks" :key="task.id">
-              <TaskDraggableVue class="mt-2 p-2 rounded-lg bg-green/30" draggable="true" @dragstart="startDrag($event, task)" :task="task"/>
+            <div v-for="task in doneTasks" :key="task.id" @click="openModalExample(task)">
+              <TaskDraggableVue class="mt-2 p-2 rounded-lg bg-green/30 cursor-pointer" draggable="true" @dragstart="startDrag($event, task)" :task="task"/>
             </div>
           </div>
           <NotFoundVue v-else />
@@ -40,6 +40,36 @@
       </div>
     </div>
     <vue-feather v-else type="rotate-cw" animation="spin" animation-speed="fast"> Loading Tasks</vue-feather>
+    <!-- Show Modal -->
+    <vue-final-modal v-model="showModal" name="example" classes="flex justify-center items-center">
+      <div class=" bg-white rounded p-4 text-left">
+        <div class="flex justify-between">
+          <!-- Title -->
+          <input v-if="edit" v-model="modalData.title" class="px-2 rounded font-bold border border-solid" type="text">
+          <span v-else class="text-2xl font-bold" name="title">{{ modalData.title }}</span>
+
+          <!-- Edit icon -->
+          <span :class="'btn-h-l font-bold cursor-pointer text-center' + classForShowTask(modalData, 'text-color')" @click="showEditTask"><vue-feather class="h-4" type="edit-3"></vue-feather> Edit</span>
+        </div>
+        <hr :class="'mt-3' + classForShowTask(modalData, 'text-color') ">
+        <div class="mt-4" name="body">
+          <textarea v-if="edit" v-model="modalData.description" cols="30" rows="10" class="px-2"></textarea>
+          <span v-else>{{ modalData.description }}</span>
+        </div>
+        <!-- Buttons -->
+        <div class="flex justify-between mt-3">
+          <CustomBtn v-if="edit" class="btn-h-l cursor-pointer" @click="hideEditTask" :classes="'rounded border border-solid' + classForShowTask(modalData, 'text-color')">
+            Cancel
+          </CustomBtn>
+          <CustomBtn v-if="edit" class="btn-h-l cursor-pointer" @click="hideEditTask" :classes="classForShowTask(modalData, 'bg-color')">
+            Done
+          </CustomBtn>
+          <CustomBtn v-if="!edit" class="btn-h-l cursor-pointer" @click="closeTask" :classes="'rounded border border-solid' + classForShowTask(modalData, 'text-color')">
+            Close
+          </CustomBtn>
+        </div>
+      </div>
+    </vue-final-modal>
   </div>
 </template>
 
@@ -48,10 +78,18 @@ import NotFoundVue from './NotFound.vue'
 import TaskDraggableVue from './TaskDraggable.vue'
 import Tasks from '../../../services/tasks'
 const tasksApi = new Tasks()
+
 export default {
   components: {
     NotFoundVue,
     TaskDraggableVue
+  },
+  data() {
+    return {
+      modalData: {},
+      showModal: false,
+      edit: false
+    }
   },
   props: {
     tasks: Array,
@@ -93,6 +131,46 @@ export default {
       if(colStatus !== itemSTATUS) {
         await tasksApi.updateTaskStatus(colStatus, itemID)
         this.$emit('taskDrag')
+      }
+    },
+    openModalExample(task) {
+      this.edit = false
+      this.modalData = task
+      this.$vfm.show('example')
+    },
+    showEditTask() {
+      this.edit = true
+    },
+    hideEditTask() {
+      this.edit = false
+    },
+    closeTask() {
+      this.$vfm.hide('example')
+    },
+    classForShowTask(task, obj) {
+      if(task?.status === 'OPEN') {
+        if(obj === 'text-color'){
+          return " text-purple"
+        }
+        if(obj === 'bg-color'){
+          return " bg-purple"
+        }
+      }
+      if(task?.status === 'IN_PROGRESS') {
+        if(obj === 'text-color'){
+          return " text-yellow"
+        }
+        if(obj === 'bg-color'){
+          return " bg-yellow"
+        }
+      }
+      if(task?.status === 'DONE') {
+        if(obj === 'text-color'){
+          return " text-green"
+        }
+        if(obj === 'bg-color'){
+          return " bg-green"
+        }
       }
     }
   }

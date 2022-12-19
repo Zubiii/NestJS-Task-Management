@@ -1,11 +1,11 @@
 <template>
     <button
+        :class="classes"
         class="
             cursor-pointer  
             text-md
             text-white
             font-bold
-            bg-orange400
             px-2 
             py-1
             rounded   
@@ -16,6 +16,9 @@
 </template>
 <script>
 export default {
-    name: 'OrangeBgButton'
+    name: 'CustomBtn',
+    props: {
+        classes: String
+    }
 }
 </script>
