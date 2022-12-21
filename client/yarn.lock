@@ -1616,7 +1616,7 @@
   optionalDependencies:
     prettier "^1.18.2 || ^2.0.0"
 
-"@vue/devtools-api@^6.4.5":
+"@vue/devtools-api@^6.1.4", "@vue/devtools-api@^6.4.5":
   version "6.4.5"
   resolved "https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.4.5.tgz"
   integrity sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ==
@@ -6047,6 +6047,13 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
+
+vee-validate@^4.7.3:
+  version "4.7.3"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-4.7.3.tgz#0200c2f1151d28d9fb6fdb6c59c01170146094be"
+  integrity sha512-1MwHLOzCrabSeChySZVVMamWStcucM1hHxapoebY9mJ7KWOvncMG19a7AlPl38zpE9pcD+G3CHKLvviGmTl5BQ==
+  dependencies:
+    "@vue/devtools-api" "^6.1.4"
 
 vue-axios@^3.5.2:
   version "3.5.2"

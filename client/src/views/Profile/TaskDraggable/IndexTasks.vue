@@ -41,15 +41,15 @@
     </div>
     <vue-feather v-else type="rotate-cw" animation="spin" animation-speed="fast"> Loading Tasks</vue-feather>
     <!-- Show Modal -->
-    <vue-final-modal v-model="showModal" name="example" classes="flex justify-center items-center">
-      <div class=" bg-white rounded p-4 text-left">
+    <vue-final-modal v-model="showModal" name="showTask" classes="flex justify-center items-center">
+      <div class="bg-white rounded p-4 text-left">
         <div class="flex justify-between">
           <!-- Title -->
           <input v-if="edit" v-model="modalData.title" class="px-2 rounded font-bold border border-solid" type="text">
           <span v-else class="text-2xl font-bold" name="title">{{ modalData.title }}</span>
 
           <!-- Edit icon -->
-          <span :class="'btn-h-l font-bold cursor-pointer text-center' + classForShowTask(modalData, 'text-color')" @click="showEditTask"><vue-feather class="h-4" type="edit-3"></vue-feather> Edit</span>
+          <span v-if="modalData.status !== 'DONE'" :class="'btn-h-l font-bold cursor-pointer text-center' + classForShowTask(modalData, 'text-color')" @click="showEditTask"><vue-feather class="h-4" type="edit-3"></vue-feather> Edit</span>
         </div>
         <hr :class="'mt-3' + classForShowTask(modalData, 'text-color') ">
         <div class="mt-4" name="body">
@@ -136,7 +136,7 @@ export default {
     openModalExample(task) {
       this.edit = false
       this.modalData = task
-      this.$vfm.show('example')
+      this.$vfm.show('showTask')
     },
     showEditTask() {
       this.edit = true
@@ -145,7 +145,7 @@ export default {
       this.edit = false
     },
     closeTask() {
-      this.$vfm.hide('example')
+      this.$vfm.hide('showTask')
     },
     classForShowTask(task, obj) {
       if(task?.status === 'OPEN') {

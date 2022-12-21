@@ -13,8 +13,12 @@ export default class Tasks extends BaseHttpService {
     }
     
     async updateTaskStatus(status, taskID) {
-        console.log("status => ", status)
         const req = (await this.patch(`/tasks/${taskID}/status`, { status }, this.config)).data
         return await req
+    }
+
+    async createNewTask(title, description) {
+        const req = (await this.post(`/tasks`, {title, description}, this.config)).data
+        return req
     }
 }
