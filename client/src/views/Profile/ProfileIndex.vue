@@ -28,30 +28,6 @@
         </div>
         <hr class="text-orange400 mb-4">
         <!-- Body -->
-        <!-- <div class="mt-5">
-          <div class="flex-row my-2">
-            <span class="font-bold w-full">
-              Title
-            </span>
-            <input v-model="newTask.title" type="text" class="px-2 w-full rounded border border-solid border-orange400 text-center" required placeholder="Enter your Task Title">
-          </div>
-          <div class="flex-row my-2">
-            <span class="font-bold">
-              Description
-            </span>
-            <textarea v-model="newTask.description" cols="50" rows="10" class="px-2 w-full rounded border border-solid border-orange400 text-center" required placeholder="Enter your Task Description"></textarea>
-          </div>
-        </div> -->
-        <!-- Actions -->
-        <!-- <div class="flex justify-end">
-          <CustomBtn classes="btn-h-l m-3 border border-solid border-orange400" @click="closeNewTaskModel">
-            <span class="text-orange400">Cancel</span>
-          </CustomBtn>
-          <CustomBtn class="btn-h-l m-3 bg-orange400 px-4" @click="AddNewTask">
-            Add
-          </CustomBtn>
-        </div> -->
-
         <Form>
           <div class="mt-5">
             <div class="flex-row my-2">

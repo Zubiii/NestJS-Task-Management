@@ -45,15 +45,15 @@
       <div class="bg-white rounded p-4 text-left">
         <div class="flex justify-between">
           <!-- Title -->
-          <input v-if="edit" v-model="modalData.title" class="px-2 rounded font-bold border border-solid" type="text">
+          <input v-if="edit" v-model="modalData.title" class="px-2 rounded font-bold border border-solid w-full" type="text">
           <span v-else class="text-2xl font-bold" name="title">{{ modalData.title }}</span>
 
           <!-- Edit icon -->
-          <span v-if="modalData.status !== 'DONE'" :class="'btn-h-l font-bold cursor-pointer text-center' + classForShowTask(modalData, 'text-color')" @click="showEditTask"><vue-feather class="h-4" type="edit-3"></vue-feather> Edit</span>
+          <span v-if="(modalData.status !== 'DONE' && edit === false)" :class="'btn-h-l font-bold cursor-pointer text-center' + classForShowTask(modalData, 'text-color')" @click="showEditTask"><vue-feather class="h-4" type="edit-3"></vue-feather> Edit</span>
         </div>
         <hr :class="'mt-3' + classForShowTask(modalData, 'text-color') ">
         <div class="mt-4" name="body">
-          <textarea v-if="edit" v-model="modalData.description" cols="30" rows="10" class="px-2"></textarea>
+          <textarea v-if="edit" v-model="modalData.description" cols="50" rows="10" class="px-2"></textarea>
           <span v-else>{{ modalData.description }}</span>
         </div>
         <!-- Buttons -->
