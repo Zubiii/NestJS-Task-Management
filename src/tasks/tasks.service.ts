@@ -52,9 +52,26 @@ export class TasksService {
     }
   }
 
-  async updateATask(id: string, status: TaskStatus, user: User): Promise<Task> {
+  async updateATaskStatus(
+    id: string,
+    status: TaskStatus,
+    user: User,
+  ): Promise<Task> {
     const task = await this.getATask(id, user);
     task.status = status;
+    await this.tasksRepository.save(task);
+    return task;
+  }
+
+  async updateATask(
+    id: string,
+    user: User,
+    title: string,
+    description: string,
+  ): Promise<Task> {
+    const task = await this.getATask(id, user);
+    task.title = title;
+    task.description = description;
     await this.tasksRepository.save(task);
     return task;
   }

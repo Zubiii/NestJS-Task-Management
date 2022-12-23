@@ -15,6 +15,7 @@ import { CreateTaskDTO } from './dto/create-task.dto';
 import { UpdateTaskStatusDto } from './dto/validate-task-dto';
 import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
+import { UpdateATaskDto } from './dto/update-task.dto';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
@@ -45,7 +46,25 @@ export class TasksController {
     @Body() updateTaskStatusDto: UpdateTaskStatusDto,
     @GetUser() user: User,
   ) {
-    return this.tasksServices.updateATask(id, updateTaskStatusDto.status, user);
+    return this.tasksServices.updateATaskStatus(
+      id,
+      updateTaskStatusDto.status,
+      user,
+    );
+  }
+
+  @Patch(':id/update')
+  updateTask(
+    @Body() updateTask: UpdateATaskDto,
+    @Param('id') id: string,
+    @GetUser() user: User,
+  ) {
+    return this.tasksServices.updateATask(
+      id,
+      user,
+      updateTask.title,
+      updateTask.description,
+    );
   }
 
   @Delete(':id')
