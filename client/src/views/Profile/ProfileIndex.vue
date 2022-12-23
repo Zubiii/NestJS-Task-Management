@@ -28,37 +28,34 @@
         </div>
         <hr class="text-orange400 mb-4">
         <!-- Body -->
-        <Form>
-          <div class="mt-5">
-            <div class="flex-row my-2">
-              <span class="font-bold w-full">
-                Title
-              </span>
-              <Field v-model="newTask.title" name="title" type="text" class="px-2 w-full rounded border border-solid border-orange400 text-center" required placeholder="Enter your Task Title" :rules="isRequired" />
-              <ErrorMessage name="title" class="text-orange400 font-semibold" />
-              <!-- <input v-model="newTask.title" > -->
-            </div>
-            <div class="flex-row my-2">
-              <span class="font-bold">
-                Description
-              </span>
-              <Field v-model="newTask.description" name="description" :rules="isRequired">
-                <textarea v-model="newTask.description" cols="50" rows="10" class="px-2 w-full rounded border border-solid border-orange400 text-center" required placeholder="Enter your Task Description"></textarea>
-              </Field>
-              <ErrorMessage name="description" class="text-orange400 font-semibold" />
-            </div>
+        <div class="mt-5">
+          <div class="flex-row my-2">
+            <span class="font-bold w-full">
+              Title
+            </span>
+            <Field v-model="newTask.title" name="title" type="text" class="px-2 w-full rounded border border-solid border-orange400 text-center" required placeholder="Enter your Task Title" :rules="isRequired" />
+            <ErrorMessage name="title" class="text-orange400 font-semibold" />
+            <!-- <input v-model="newTask.title" > -->
           </div>
-          <!-- Actions -->
-          <div class="flex justify-end">
-            <CustomBtn classes="btn-h-l m-3 border border-solid border-orange400" @click="closeNewTaskModel">
-              <span class="text-orange400">Cancel</span>
-            </CustomBtn>
-            <CustomBtn class="btn-h-l m-3 bg-orange400 px-4" @click="AddNewTask">
-              Add
-            </CustomBtn>
+          <div class="flex-row my-2">
+            <span class="font-bold">
+              Description
+            </span>
+            <Field v-model="newTask.description" name="description" :rules="isRequired">
+              <textarea v-model="newTask.description" cols="50" rows="10" class="px-2 w-full rounded border border-solid border-orange400 text-center" required placeholder="Enter your Task Description"></textarea>
+            </Field>
+            <ErrorMessage name="description" class="text-orange400 font-semibold" />
           </div>
-        </Form>
-
+        </div>
+        <!-- Actions -->
+        <div class="flex justify-end">
+          <CustomBtn classes="btn-h-l m-3 border border-solid border-orange400" @click="closeNewTaskModel">
+            <span class="text-orange400">Cancel</span>
+          </CustomBtn>
+          <CustomBtn class="btn-h-l m-3 bg-orange400 px-4" @click="AddNewTask">
+            Add
+          </CustomBtn>
+        </div>
       </div>
     </vue-final-modal>
   </div>
@@ -68,7 +65,7 @@
 import { reactive, toRefs } from '@vue/reactivity'
 import OrangeBgBtnVue from '@/components/Buttons/OrangeBgBtn.vue'
 import TaskDraggable from './TaskDraggable/IndexTasks.vue'
-import {Field, Form, ErrorMessage} from 'vee-validate'
+import {Field, ErrorMessage} from 'vee-validate'
 import Tasks from '../../services/tasks'
 const tasks = new Tasks()
 
@@ -103,7 +100,6 @@ export default {
     OrangeBgBtnVue,
     TaskDraggable,
     Field,
-    Form,
     ErrorMessage
   },
   methods: {
@@ -132,6 +128,7 @@ export default {
       this.newTask.title = '' 
       this.newTask.description = ''
       this.closeNewTaskModel()
+      this.usrTasks.push(newTask)
     }
   }
 }
