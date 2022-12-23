@@ -61,7 +61,7 @@
           <CustomBtn v-if="edit" class="btn-h-l cursor-pointer" @click="hideEditTask" :classes="'rounded border border-solid' + classForShowTask(modalData, 'text-color')">
             Cancel
           </CustomBtn>
-          <CustomBtn v-if="edit" class="btn-h-l cursor-pointer" @click="hideEditTask" :classes="classForShowTask(modalData, 'bg-color')">
+          <CustomBtn v-if="edit" class="btn-h-l cursor-pointer" @click="editTaskAPI(modalData.id)" :classes="classForShowTask(modalData, 'bg-color')">
             Done
           </CustomBtn>
           <CustomBtn v-if="!edit" class="btn-h-l cursor-pointer" @click="closeTask" :classes="'rounded border border-solid' + classForShowTask(modalData, 'text-color')">
@@ -77,6 +77,7 @@
 import NotFoundVue from './NotFound.vue'
 import TaskDraggableVue from './TaskDraggable.vue'
 import Tasks from '../../../services/tasks'
+import { notify } from "@kyvg/vue3-notification";
 const tasksApi = new Tasks()
 
 export default {
@@ -171,6 +172,17 @@ export default {
         if(obj === 'bg-color'){
           return " bg-green"
         }
+      }
+    },
+    async editTaskAPI(id) {
+      let updatedTask = await tasksApi.updateATask(id, this.modalData)
+      if(updatedTask){
+        notify({
+          title: "Successfully Updated",
+          text: `Task with the ID:${id} have been successfully updated.`,
+          type: "success"
+        })
+        this.hideEditTask()
       }
     }
   }

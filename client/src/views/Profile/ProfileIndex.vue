@@ -123,8 +123,6 @@ export default {
     async AddNewTask() {
       if(!this.validationAddTask) return 
       let newTask = await tasks.createNewTask(this.newTask.title, this.newTask.description)
-      console.log("newTask => ", newTask)
-      console.log('Task Added!!')
       this.newTask.title = '' 
       this.newTask.description = ''
       this.closeNewTaskModel()

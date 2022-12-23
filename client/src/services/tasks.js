@@ -21,4 +21,9 @@ export default class Tasks extends BaseHttpService {
         const req = (await this.post(`/tasks`, {title, description}, this.config)).data
         return req
     }
+
+    async updateATask(id, modalData) {
+        const req = (await this.patch(`/tasks/${id}/update`, {title: modalData.title, description: modalData.description}, this.config)).data
+        return req
+    }
 }
