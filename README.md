@@ -36,14 +36,16 @@ $ npm install
 
 ```bash
 # development
-$ npm run start
-
+$ yarn start
+## Running the app
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
-# production mode
-$ npm run start:prod
+# make build
+$ yarn build
 ```
+
+<p align="center" ><strong>Note:</strong> This app already have attached the frontend, that are made in vue3</p>
 
 ## Test
 
