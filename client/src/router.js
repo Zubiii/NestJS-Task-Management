@@ -9,18 +9,25 @@ const routes = [
     {
         path: '/',
         name: 'home',
-        component: home
+        component: home,
+        meta: {
+            title: "Task Managment"
+        }
     },
     {
         path: '/auth',
         name: 'login',
-        component: auth
+        component: auth,
+        meta: {
+            title: "Task Managment - Auth"
+        }
     },
     {
         path: '/profile',
         name: 'profile',
         component: profile,
         meta: {
+            title: "Task Managment - Profile",
             middleware: [
                 authMiddleware
             ]
@@ -34,6 +41,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+
+    // Let's Add title to the page
+    document.title = `${to.meta.title}`
 
     // Nevigate to the next if middleware is not applied
     if(!to.meta.middleware) return next()
